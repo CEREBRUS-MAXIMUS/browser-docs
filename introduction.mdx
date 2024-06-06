@@ -416,6 +416,8 @@ To use a tool in a session.
 **Parameters:**
 - `sessionId` (required): ID of the session to use the tool in.
 - `toolId` (required): ID of the tool to use.
+- `elementType` (required): "inputBox" (From /getTools)
+- `textInput` (optional): Text to be typed
 
 **Example Request:**
 
@@ -424,8 +426,10 @@ POST http://localhost:1234/useTool
 Content-Type: application/json
 
 {
-  "sessionId": "unique-session-id",
-  "toolId": "tool-id"
+  "sessionId": "73839221-5d9b-488c-a502-852814fde5bb",
+  "toolId": "input-id-1HumCE",
+  "elementType": "inputBox",
+  "textInput": "sahil is amazing"
 }
 ```
 
