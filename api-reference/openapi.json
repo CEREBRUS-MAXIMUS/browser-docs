@@ -47,7 +47,7 @@
     },
     "/startSession": {
       "post": {
-        "summary": "Start a new session",
+        "summary": "Start Browsing Session",
         "requestBody": {
           "content": {
             "application/json": {
@@ -83,7 +83,7 @@
     },
     "/endSession": {
       "post": {
-        "summary": "End a session",
+        "summary": "End Browsing Session",
         "requestBody": {
           "content": {
             "application/json": {
@@ -132,7 +132,7 @@
     },
     "/currentDOMRepresentation": {
       "get": {
-        "summary": "Get current DOM representation",
+        "summary": "Get Current DOM JSON",
         "requestBody": {
           "content": {
             "application/json": {
@@ -220,7 +220,7 @@
     },
     "/currentTools": {
       "get": {
-        "summary": "Get current tools",
+        "summary": "Get Browsing Tools",
         "requestBody": {
           "content": {
             "application/json": {
@@ -320,7 +320,7 @@
     },
     "/currentMarkdown": {
       "get": {
-        "summary": "Get current markdown",
+        "summary": "Get Browser Markdown",
         "requestBody": {
           "content": {
             "application/json": {
@@ -458,7 +458,7 @@
         }
       },
       "post": {
-        "summary": "Update current URL",
+        "summary": "Set Session URL",
         "requestBody": {
           "content": {
             "application/json": {
@@ -522,7 +522,7 @@
     },
     "/useTool": {
       "post": {
-        "summary": "Use a tool",
+        "summary": "Use Browser Tool",
         "requestBody": {
           "content": {
             "application/json": {
@@ -570,7 +570,7 @@
     },
     "/clearSessions": {
       "get": {
-        "summary": "Clear all sessions",
+        "summary": "Clear All Sessions",
         "responses": {
           "200": {
             "description": "Sessions cleared successfully",
