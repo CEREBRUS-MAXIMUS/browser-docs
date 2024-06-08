@@ -1,447 +1,71 @@
 ---
-title: Express Backend API Documentation
-description: 'Welcome to the home of your new documentation'
+title: 'Welcome to Surfer'
+description: 'Your personal internet scraper and assistant'
 ---
-This document provides a comprehensive overview of all endpoints available in this Express backend, including example requests and responses. Each endpoint is described in terms of its purpose, method, URL, required parameters, and example code.
 
-## Table of Contents
+Surfer is a revolutionary application that transforms the way you interact with the internet. It's your personal digital assistant, designed to scrape and navigate the web on your behalf, saving you time and effort while giving you unprecedented control over your online experience.
 
-1. [General Endpoints](#general-endpoints)
-    - [Root Endpoint](#root-endpoint)
-2. [Session Management](#session-management)
-    - [Start Session](#start-session)
-    - [End Session](#end-session)
-    - [Clear Sessions](#clear-sessions)
-    - [Get Current Sessions](#get-current-sessions)
-3. [Session Data](#session-data)
-    - [Get Current DOM Representation](#get-current-dom-representation)
-    - [Update Current DOM Representation](#update-current-dom-representation)
-    - [Get Current Tools](#get-current-tools)
-    - [Update Current Tools](#update-current-tools)
-    - [Get Current Markdown](#get-current-markdown)
-    - [Update Current Markdown](#update-current-markdown)
-    - [Get Current URL](#get-current-url)
-    - [Update Current URL](#update-current-url)
-    - [Use Tool](#use-tool)
+## What is Surfer?
 
-## General Endpoints
+At its core, Surfer is an intelligent web scraper. But it's so much more than that. It's a tool that understands your needs, learns from your behaviors, and adapts to your unique way of interacting with the web.
 
-### Root Endpoint
+<CardGroup cols={2}>
+  <Card title="Smart Scraping" icon="spider-web">
+    Surfer doesn't just blindly scrape data. It intelligently analyzes web pages, understanding context, layout, and content to extract precisely what you need.
+  </Card>
+  <Card title="Session Management" icon="browser">
+    With our unique session-based approach, Surfer remembers where you've been and what you've done, making your web interactions seamless and efficient.
+  </Card>
+  <Card title="Custom Tools" icon="screwdriver-wrench">
+    Create your own tools or use our pre-built ones to interact with web content in ways you never thought possible. From data extraction to content manipulation, the web is your playground.
+  </Card>
+  <Card title="Privacy First" icon="shield-check">
+    Your data belongs to you. Surfer runs locally on your machine, ensuring your web activities and the data you scrape remain private and secure.
+  </Card>
+</CardGroup>
 
-#### `GET /`
+## Why Use Surfer?
 
-**Purpose:** 
-To verify that the server is up and running.
+In today's information age, we're drowning in data. Surfer is your lifeline. It cuts through the noise, bringing you exactly what you need without the clutter.
 
-**Example Request:**
+- **Save Time**: Automate repetitive web tasks. Let Surfer handle the grunt work while you focus on what matters.
+- **Enhanced Productivity**: With tools tailored to your needs, you'll work smarter, not harder.
+- **Personalized Web**: Your web, your way. Surfer adapts to your unique browsing style.
+- **Data Insights**: Extract, analyze, and visualize web data like never before. Turn information into actionable insights.
 
-```http
-GET http://localhost:1234/
-```
+## Getting Started
 
-**Example Response:**
+Ready to revolutionize your web experience? Here's how to get started with Surfer:
 
-```text
-yo the port is up
-```
+<Steps>
+  <Step title="Download and Install">
+    Visit our [download page](/download) to get the latest version of Surfer for your operating system.
+  </Step>
+  <Step title="Launch and Explore">
+    Open Surfer and start a new session. Navigate to a website and watch as Surfer analyzes the page structure.
+  </Step>
+  <Step title="Create Your First Tool">
+    Head over to our [Tools Guide](/tools) to learn how to create your first custom tool. Start simple, like extracting all links from a page.
+  </Step>
+  <Step title="Join the Community">
+    Share your tools, get inspired by others, and help shape the future of web interaction in our [community forums](/community).
+  </Step>
+</Steps>
 
-## Session Management
+## What's Next?
 
-### Start Session
+Surfer is more than a product; it's a movement towards a more efficient, personalized, and powerful web experience. As you dive deeper, you'll discover features like:
 
-#### `POST /startSession`
+- **AI-Powered Suggestions**: Surfer learns from your actions to suggest new tools and workflows.
+- **Cross-Site Data Analysis**: Connect dots across different websites for insights you'd never find manually.
+- **Scheduled Scraping**: Set Surfer to gather data at regular intervals, tracking changes over time.
 
-**Purpose:** 
-To start a new session and return a unique session ID.
+## Stay Updated
 
-**Parameters:**
-- `url` (optional): URL to open in the session. Defaults to 'https://www.google.com' if not provided.
+Surfer is constantly evolving. We're always adding new features, improving performance, and expanding our capabilities. To stay in the loop:
 
-**Example Request:**
+- Follow our [blog](/blog) for the latest updates and tips.
+- Join our [newsletter](#) for monthly roundups and exclusive content.
+- Follow us on [Twitter](https://twitter.com/piedpiper) and [LinkedIn](https://linkedin.com/company/piedpiper).
 
-```http
-POST http://localhost:1234/startSession
-Content-Type: application/json
-
-{
-  "url": "https://www.example.com"
-}
-```
-
-**Example Response:**
-
-```json
-{
-  "sessionId": "unique-session-id"
-}
-```
-
-### End Session
-
-#### `POST /endSession`
-
-**Purpose:** 
-To end a session and close the associated browser window.
-
-**Parameters:**
-- `sessionId` (required): ID of the session to end.
-
-**Example Request:**
-
-```http
-POST http://localhost:1234/endSession
-Content-Type: application/json
-
-{
-  "sessionId": "unique-session-id"
-}
-```
-
-**Example Response:**
-
-```json
-{
-  "success": true,
-  "message": "Session ended successfully"
-}
-```
-
-### Clear Sessions
-
-#### `GET /clearSessions`
-
-**Purpose:** 
-To clear all current sessions.
-
-**Example Request:**
-
-```http
-GET http://localhost:1234/clearSessions
-```
-
-**Example Response:**
-
-```json
-{
-  "success": true,
-  "message": "Sessions cleared successfully"
-}
-```
-
-### Get Current Sessions
-
-#### `GET /currentSessions`
-
-**Purpose:** 
-To retrieve all current sessions.
-
-**Example Request:**
-
-```http
-GET http://localhost:1234/currentSessions
-```
-
-**Example Response:**
-
-```json
-[
-  {
-    "sessionID": "unique-session-id",
-    "history": [],
-    "currentMarkdown": "",
-    "currentDOMRepresentation": {},
-    "currentTools": [],
-    "currentURL": "https://www.example.com",
-    "metadata": {}
-  }
-]
-```
-
-## Session Data
-
-### Get Current DOM Representation
-
-#### `GET /currentDOMRepresentation`
-
-**Purpose:** 
-To get the current DOM representation for a session.
-
-**Parameters:**
-- `sessionId` (required): ID of the session to retrieve the DOM representation for.
-
-**Example Request:**
-
-```http
-GET http://localhost:1234/currentDOMRepresentation
-Content-Type: application/json
-
-{
-  "sessionId": "unique-session-id"
-}
-```
-
-**Example Response:**
-
-```json
-{
-  "currentDOMRepresentation": {}
-}
-```
-
-### Update Current DOM Representation
-
-#### `POST /currentDOMRepresentation`
-
-**Purpose:** 
-To update the current DOM representation for a session.
-
-**Parameters:**
-- `sessionId` (required): ID of the session to update.
-- `currentDOMRepresentation` (required): New DOM representation data.
-
-**Example Request:**
-
-```http
-POST http://localhost:1234/currentDOMRepresentation
-Content-Type: application/json
-
-{
-  "sessionId": "unique-session-id",
-  "currentDOMRepresentation": {}
-}
-```
-
-**Example Response:**
-
-```json
-{
-  "success": true,
-  "message": "currentDOMRepresentation updated successfully"
-}
-```
-
-### Get Current Tools
-
-#### `GET /currentTools`
-
-**Purpose:** 
-To get the current tools for a session.
-
-**Parameters:**
-- `sessionId` (required): ID of the session to retrieve the tools for.
-
-**Example Request:**
-
-```http
-GET http://localhost:1234/currentTools
-Content-Type: application/json
-
-{
-  "sessionId": "unique-session-id"
-}
-```
-
-**Example Response:**
-
-```json
-{
-  "currentTools": []
-}
-```
-
-### Update Current Tools
-
-#### `POST /currentTools`
-
-**Purpose:** 
-To update the current tools for a session.
-
-**Parameters:**
-- `sessionId` (required): ID of the session to update.
-- `tools` (required): New tools data.
-
-**Example Request:**
-
-```http
-POST http://localhost:1234/currentTools
-Content-Type: application/json
-
-{
-  "sessionId": "unique-session-id",
-  "tools": []
-}
-```
-
-**Example Response:**
-
-```json
-{
-  "success": true,
-  "message": "Tools updated successfully"
-}
-```
-
-### Get Current Markdown
-
-#### `GET /currentMarkdown`
-
-**Purpose:** 
-To get the current markdown and metadata for a session.
-
-**Parameters:**
-- `sessionId` (required): ID of the session to retrieve the markdown for.
-
-**Example Request:**
-
-```http
-GET http://localhost:1234/currentMarkdown
-Content-Type: application/json
-
-{
-  "sessionId": "unique-session-id"
-}
-```
-
-**Example Response:**
-
-```json
-{
-  "markdown": "",
-  "metadata": {}
-}
-```
-
-### Update Current Markdown
-
-#### `POST /currentMarkdown`
-
-**Purpose:** 
-To update the current markdown and metadata for a session.
-
-**Parameters:**
-- `sessionId` (required): ID of the session to update.
-- `markdown` (required): New markdown content.
-- `metadata` (required): New metadata.
-
-**Example Request:**
-
-```http
-POST http://localhost:1234/currentMarkdown
-Content-Type: application/json
-
-{
-  "sessionId": "unique-session-id",
-  "markdown": "",
-  "metadata": {}
-}
-```
-
-**Example Response:**
-
-```json
-{
-  "success": true,
-  "message": "Markdown updated successfully"
-}
-```
-
-### Get Current URL
-
-#### `GET /currentURL`
-
-**Purpose:** 
-To get the current URL for a session.
-
-**Parameters:**
-- `sessionId` (required): ID of the session to retrieve the URL for.
-
-**Example Request:**
-
-```http
-GET http://localhost:1234/currentURL
-Content-Type: application/json
-
-{
-  "sessionId": "unique-session-id"
-}
-```
-
-**Example Response:**
-
-```json
-{
-  "currentURL": "https://www.example.com"
-}
-```
-
-### Update Current URL
-
-#### `POST /currentURL`
-
-**Purpose:** 
-To update the current URL for a session.
-
-**Parameters:**
-- `sessionId` (required): ID of the session to update.
-- `url` (required): New URL.
-
-**Example Request:**
-
-```http
-POST http://localhost:1234/currentURL
-Content-Type: application/json
-
-{
-  "sessionId": "unique-session-id",
-  "url": "https://www.new-url.com"
-}
-```
-
-**Example Response:**
-
-```json
-{
-  "success": true,
-  "message": "URL updated successfully"
-}
-```
-
-### Use Tool
-
-#### `POST /useTool`
-
-**Purpose:** 
-To use a tool in a session.
-
-**Parameters:**
-- `sessionId` (required): ID of the session to use the tool in.
-- `toolId` (required): ID of the tool to use.
-- `elementType` (required): "inputBox" (From /getTools)
-- `textInput` (optional): Text to be typed
-
-**Example Request:**
-
-```http
-POST http://localhost:1234/useTool
-Content-Type: application/json
-
-{
-  "sessionId": "73839221-5d9b-488c-a502-852814fde5bb",
-  "toolId": "input-id-1HumCE",
-  "elementType": "inputBox",
-  "textInput": "sahil is amazing"
-}
-```
-
-**Example Response:**
-
-```json
-{
-  "success": true,
-  "message": "Tool used successfully"
-}
-```
-
-## Conclusion
-
-This documentation covers all available endpoints in the provided Express backend. Each endpoint is explained with its purpose, parameters, and example code for making requests and interpreting responses. This should serve as a comprehensive guide for interacting with the backend API.
+Welcome aboard! With Surfer, you're not just browsing the web—you're mastering it. Let's make the internet work for you.
