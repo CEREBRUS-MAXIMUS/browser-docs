@@ -77,7 +77,22 @@
     {
       "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/healthcheck"
+        "api-reference/endpoint/check-if-server-is-up",
+        "check-if-server-is-up",
+        "healthcheck-endpoint",
+        "start-a-new-session",
+        "end-a-session",
+        "get-current-dom-representation",
+        "update-current-dom-representation",
+        "get-current-tools",
+        "update-current-tools",
+        "get-current-markdown",
+        "update-current-markdown",
+        "get-current-url",
+        "update-current-url",
+        "get-all-current-sessions",
+        "use-a-tool",
+        "clear-all-sessions"
       ]
     }
   ],
