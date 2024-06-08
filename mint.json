@@ -77,18 +77,12 @@
     {
       "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/check-if-server-is-up",
-        "api-reference/endpoint/check-if-server-is-up",
         "api-reference/endpoint/healthcheck-endpoint",
         "api-reference/endpoint/start-a-new-session",
         "api-reference/endpoint/end-a-session",
         "api-reference/endpoint/get-current-dom-representation",
-        "api-reference/endpoint/update-current-dom-representation",
         "api-reference/endpoint/get-current-tools",
-        "api-reference/endpoint/update-current-tools",
         "api-reference/endpoint/get-current-markdown",
-        "api-reference/endpoint/update-current-markdown",
-        "api-reference/endpoint/get-current-url",
         "api-reference/endpoint/update-current-url",
         "api-reference/endpoint/get-all-current-sessions",
         "api-reference/endpoint/use-a-tool",
