@@ -7,12 +7,12 @@
   },
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#0D9373",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "primary": "#0d7091",
+    "light": "#07b3ca",
+    "dark": "#0d7091",
     "anchors": {
-      "from": "#0D9373",
-      "to": "#07C983"
+      "from": "#0d7091",
+      "to": "#07b3ca"
     }
   },
   "topbarLinks": [
@@ -77,9 +77,7 @@
     {
       "group": "Endpoint Examples",
       "pages": [
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/delete"
+        "api-reference/endpoint/healthcheck"
       ]
     }
   ],
