@@ -18,12 +18,12 @@
   "topbarLinks": [
     {
       "name": "Support",
-      "url": "mailto:hi@mintlify.com"
+      "url": "mailto:lihas1002@gmail.com"
     }
   ],
   "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://dashboard.mintlify.com"
+    "name": "Download",
+    "url": "https://surfsup.ai"
   },
   "tabs": [
     {
@@ -62,8 +62,8 @@
     }
   ],
   "footerSocials": {
-    "x": "https://x.com/mintlify",
-    "github": "https://github.com/mintlify",
-    "linkedin": "https://www.linkedin.com/company/mintsearch"
+    "x": "https://x.com/SahilLalani0",
+    "github": "https://github.com/CEREBRUS-MAXIMUS",
+    "linkedin": "https://www.linkedin.com/in/jackblair876/"
   }
 }
