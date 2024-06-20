@@ -1,13 +1,13 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Pied Piper Session Management API",
-    "description": "API for managing browser sessions and tools in the Pied Piper application",
+    "title": "Surfer Session Management API",
+    "description": "API for managing browser sessions and tools in the Surfer application",
     "version": "1.0.0"
   },
   "servers": [
     {
-      "url": "http://localhost:1234"
+      "url": "http://localhost:42069"
     }
   ],
   "paths": {
@@ -30,7 +30,7 @@
     },
     "/health": {
       "get": {
-        "summary": "Healthcheck endpoint",
+        "summary": "Healthcheck",
         "responses": {
           "200": {
             "description": "Server is healthy",
@@ -45,9 +45,9 @@
         }
       }
     },
-    "/startSession": {
+    "/convertToMarkdown": {
       "post": {
-        "summary": "Start Browsing Session",
+        "summary": "Convert URL to Markdown",
         "requestBody": {
           "content": {
             "application/json": {
@@ -56,69 +56,29 @@
                 "properties": {
                   "url": {
                     "type": "string"
+                  },
+                  "local": {
+                    "type": "boolean"
                   }
-                }
+                },
+                "required": ["url"]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Session started successfully",
+            "description": "Conversion successful",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object",
-                  "properties": {
-                    "sessionId": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/endSession": {
-      "post": {
-        "summary": "End Browsing Session",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "sessionId": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Session ended successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  }
+                  "$ref": "#/components/schemas/ConvertToMarkdownResponse"
                 }
               }
             }
           },
-          "404": {
-            "description": "Session not found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
@@ -130,454 +90,47 @@
         }
       }
     },
-    "/currentDOMRepresentation": {
-      "get": {
-        "summary": "Get Current DOM JSON",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "sessionId": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Current DOM representation retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "currentDOMRepresentation": {
-                      "type": "object"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Session not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
+    "/parseStructuredOutput": {
       "post": {
-        "summary": "Update current DOM representation",
+        "summary": "Parse structured output from URL",
         "requestBody": {
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
                 "properties": {
-                  "sessionId": {
-                    "type": "string"
-                  },
-                  "currentDOMRepresentation": {
-                    "type": "object"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "DOM representation updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Session not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/currentTools": {
-      "get": {
-        "summary": "Get Browsing Tools",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "sessionId": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Current tools retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "browserTools": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    },
-                    "pageTools": {
-                      "type": "array",
-                      "items": {
-                        "type": "object"
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Session not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Update current tools",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "sessionId": {
-                    "type": "string"
-                  },
-                  "tools": {
-                    "type": "array",
-                    "items": {
-                      "type": "object"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Tools updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Session not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/currentMarkdown": {
-      "get": {
-        "summary": "Get Browser Markdown",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "sessionId": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Current markdown retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "markdown": {
-                      "type": "string"
-                    },
-                    "metadata": {
-                      "type": "object"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Session not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Update current markdown",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "sessionId": {
-                    "type": "string"
-                  },
-                  "markdown": {
-                    "type": "string"
-                  },
-                  "metadata": {
-                    "type": "object"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Markdown updated successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Session not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/currentURL": {
-      "get": {
-        "summary": "Get current URL",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "sessionId": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Current URL retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "currentURL": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Session not found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "summary": "Set Session URL",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "sessionId": {
-                    "type": "string"
-                  },
                   "url": {
                     "type": "string"
+                  },
+                  "local": {
+                    "type": "boolean"
+                  },
+                  "parsingOutput": {
+                    "type": "object"
                   }
-                }
+                },
+                "required": ["url", "parsingOutput"]
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "URL updated successfully",
+            "description": "Parsing successful",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
+                  "$ref": "#/components/schemas/ParseStructuredOutputResponse"
                 }
               }
             }
           },
-          "404": {
-            "description": "Session not found",
+          "400": {
+            "description": "Bad Request",
             "content": {
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Error"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/currentSessions": {
-      "get": {
-        "summary": "Get all current sessions",
-        "responses": {
-          "200": {
-            "description": "All sessions retrieved",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Session"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/useTool": {
-      "post": {
-        "summary": "Use Browser Tool",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "sessionId": {
-                    "type": "string"
-                  },
-                  "toolId": {
-                    "type": "string"
-                  },
-                  "elementType": {
-                    "type": "string"
-                  },
-                  "textInput": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Tool used successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "status": {
-                      "type": "integer"
-                    },
-                    "success": {
-                      "type": "string"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/clearSessions": {
-      "get": {
-        "summary": "Clear All Sessions",
-        "responses": {
-          "200": {
-            "description": "Sessions cleared successfully",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SuccessResponse"
                 }
               }
             }
@@ -623,6 +176,37 @@
             "items": {
               "type": "object"
             }
+          }
+        }
+      },
+      "ConvertToMarkdownResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "markdown": {
+            "type": "string"
+          },
+          "metadata": {
+            "type": "object"
+          }
+        }
+      },
+      "ParseStructuredOutputResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean"
+          },
+          "structuredOutput": {
+            "type": "object"
+          },
+          "metadata": {
+            "type": "object"
+          },
+          "markdown": {
+            "type": "string"
           }
         }
       },
