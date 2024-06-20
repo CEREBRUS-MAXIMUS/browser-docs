@@ -1,73 +1,48 @@
-<img height="200" src="images/SuferIcon.png" />
-
 ---
 title: 'Welcome to Surfer'
-description: 'Your personal internet scraper and assistant'
+description: 'Surfer is authenticated, local, private, and fast automated web scraping.'
 ---
 
-Surfer is a revolutionary application that transforms the way you interact with the internet. It's your personal digital assistant, designed to scrape and navigate the web on your behalf, saving you time and effort while giving you unprecedented control over your online experience.
-
-## What is Surfer?
-
-At its core, Surfer is an intelligent web scraper. But it's so much more than that. It's a tool that understands your needs, learns from your behaviors, and adapts to your unique way of interacting with the web.
-
-<CardGroup cols={2}>
-  <Card title="Smart Scraping" icon="spider-web">
-    Surfer doesn't just blindly scrape data. It intelligently analyzes web pages, understanding context, layout, and content to extract precisely what you need.
-  </Card>
-  <Card title="Session Management" icon="browser">
-    With our unique session-based approach, Surfer remembers where you've been and what you've done, making your web interactions seamless and efficient.
-  </Card>
-  <Card title="Custom Tools" icon="screwdriver-wrench">
-    Create your own tools or use our pre-built ones to interact with web content in ways you never thought possible. From data extraction to content manipulation, the web is your playground.
-  </Card>
-  <Card title="Privacy First" icon="shield-check">
-    Your data belongs to you. Surfer runs locally on your machine, ensuring your web activities and the data you scrape remain private and secure.
-  </Card>
-</CardGroup>
-
-## Why Use Surfer?
-
-In today's information age, we're drowning in data. Surfer is your lifeline. It cuts through the noise, bringing you exactly what you need without the clutter.
-
-- **Save Time**: Automate repetitive web tasks. Let Surfer handle the grunt work while you focus on what matters.
-- **Enhanced Productivity**: With tools tailored to your needs, you'll work smarter, not harder.
-- **Personalized Web**: Your web, your way. Surfer adapts to your unique browsing style.
-- **Data Insights**: Extract, analyze, and visualize web data like never before. Turn information into actionable insights.
-
-## Getting Started
-
-Ready to revolutionize your web experience? Here's how to get started with Surfer:
-
 <Steps>
-  <Step title="Download and Install">
-    Visit our [download page](/download) to get the latest version of Surfer for your operating system.
+  <Step title="Install Surfer">
+    Visit our [download page](https://surfsup.ai) to get the latest version of Surfer for your operating system.
   </Step>
-  <Step title="Launch and Explore">
-    Open Surfer and start a new session. Navigate to a website and watch as Surfer analyzes the page structure.
+  <Step title="Install Python Package">
+    ```python
+    pip install surferai
+        ```
   </Step>
-  <Step title="Create Your First Tool">
-    Head over to our [Tools Guide](/tools) to learn how to create your first custom tool. Start simple, like extracting all links from a page.
+  <Step title="Convert Websites to LLM-readable data">
+    ```python
+    from surferai import *
+
+markdown_result = convertToMarkdown("https://example.com")
+print("Markdown conversion:", markdown_result)
+        ```
   </Step>
-  <Step title="Join the Community">
-    Share your tools, get inspired by others, and help shape the future of web interaction in our [community forums](/community).
+  <Step title="Extract Structured Data from Websites ">
+    ```python
+    from surferai import *
+from pydantic import BaseModel
+from typing import Optional
+
+# Define a class for your exctraction format
+class StartupWebsite(BaseModel):
+      company_mission: Optional[str] 
+      supports_sso: Optional[bool]
+      is_open_source: Optional[bool]
+
+      #A nice to string method
+      def __str__(self):
+          return f"Company Mission: {self.company_mission}\nSupports SSO: {self.supports_sso}\nIs Open Source: {self.is_open_source}"
+
+
+startup_data = parseFromURL("https://mendable.ai", StartupWebsite)
+print("Parsed startup data:", startup_data)
+
+        ```
+        `startup_data` is automatically Type StartupWebsite!
+        
+        All class fields are Optional in case the AI cannot find the information.
   </Step>
 </Steps>
-
-## What's Next?
-
-Surfer is more than a product; it's a movement towards a more efficient, personalized, and powerful web experience. As you dive deeper, you'll discover features like:
-
-- **AI-Powered Suggestions**: Surfer learns from your actions to suggest new tools and workflows.
-- **Cross-Site Data Analysis**: Connect dots across different websites for insights you'd never find manually.
-- **Scheduled Scraping**: Set Surfer to gather data at regular intervals, tracking changes over time.
-
-## Stay Updated
-
-Surfer is constantly evolving. We're always adding new features, improving performance, and expanding our capabilities. To stay in the loop:
-
-- Follow our [blog](/blog) for the latest updates and tips.
-- Join our [newsletter](#) for monthly roundups and exclusive content.
-- Follow us on [Twitter](https://twitter.com/piedpiper) and [LinkedIn](https://linkedin.com/company/piedpiper).
-
-Welcome aboard! With Surfer, you're not just browsing the web—you're mastering it. Let's make the internet work for you.
