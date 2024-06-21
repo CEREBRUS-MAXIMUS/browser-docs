@@ -13,6 +13,10 @@ class StartupWebsite(BaseModel):
 startup_data = parseFromURL("https://mendable.ai", StartupWebsite)
 print("Parsed startup data (Pydantic model):", startup_data)
 
+#===================================================
+#OR YOU CAN JUST PASS IN THE OPENAPI SCHEMA DIRECTLY
+#===================================================
+
 # Using OpenAPI schema
 openapi_schema = {
     "type": "object",
