@@ -1,48 +1,34 @@
----
-title: 'Surfer Quickstart'
-description: 'About 4 minutes'
----
+Great Examples
 
-<Steps>
-  <Step title="Install Surfer">
-    Visit our [download page](https://surfsup.ai) to get the latest version of Surfer for your operating system.
-  </Step>
-  <Step title="Install Python Package">
-    ```python
-    pip install surferai
-        ```
-  </Step>
-  <Step title="Convert Websites to LLM-readable data">
-    ```python
-    from surferai import convertToMarkdown
-
-markdown_result = convertToMarkdown("https://example.com")
-print("Markdown conversion:", markdown_result)
-        ```
-  </Step>
-  <Step title="Extract Structured Data from Websites ">
-    ```python
-    from surferai import parseFromURL
-from pydantic import BaseModel
-from typing import Optional
-
-# Define a class for your exctraction format
+``` python
 class StartupWebsite(BaseModel):
-      company_mission: Optional[str] 
-      supports_sso: Optional[bool]
-      is_open_source: Optional[bool]
+        company_mission: Optional[str]
+        supports_sso: Optional[bool]
+        is_open_source: Optional[bool]
 
-      #A nice to string method
-      def __str__(self):
-          return f"Company Mission: {self.company_mission}\nSupports SSO: {self.supports_sso}\nIs Open Source: {self.is_open_source}"
+        def __str__(self):
+            return f"Company Mission: {self.company_mission}\nSupports SSO: {self.supports_sso}\nIs Open Source: {self.is_open_source}"
 
+    # Using Pydantic model
+    startup_data = parseFromURL("https://mendable.ai", StartupWebsite)
+    print("Parsed startup data (Pydantic model):", startup_data)
 
-startup_data = parseFromURL("https://mendable.ai", StartupWebsite)
-print("Parsed startup data:", startup_data)
-
-        ```
-        `startup_data` is automatically Type StartupWebsite!
-        
-        All class fields are Optional in case the AI cannot find the information.
-  </Step>
-</Steps>
+    # Using OpenAPI schema
+    openapi_schema = {
+        "type": "object",
+        "properties": {
+            "github_social_link": {
+                "type": "string"
+            },
+            "twitter_social_link": {
+                "type": "string"
+            },
+            "discord_social_link": {
+                "type": "string"
+            }
+        }
+    }
+    
+    startup_data_dict = parseFromURL("https://docs.vapi.ai/assistants/dynamic-variables", openapi_schema)
+    print("Parsed startup data (OpenAPI schema):", startup_data_dict)
+```
