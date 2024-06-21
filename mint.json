@@ -47,6 +47,7 @@
     {
       "group": "API Documentation",
       "pages": [
+        "api-reference/local-api"
       ]
     },
     {
