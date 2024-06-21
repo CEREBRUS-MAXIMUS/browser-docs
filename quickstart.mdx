@@ -2,33 +2,33 @@ Great Examples
 
 ``` python
 class StartupWebsite(BaseModel):
-        company_mission: Optional[str]
-        supports_sso: Optional[bool]
-        is_open_source: Optional[bool]
+    company_mission: Optional[str]
+    supports_sso: Optional[bool]
+    is_open_source: Optional[bool]
 
-        def __str__(self):
-            return f"Company Mission: {self.company_mission}\nSupports SSO: {self.supports_sso}\nIs Open Source: {self.is_open_source}"
+    def __str__(self):
+        return f"Company Mission: {self.company_mission}\nSupports SSO: {self.supports_sso}\nIs Open Source: {self.is_open_source}"
 
-    # Using Pydantic model
-    startup_data = parseFromURL("https://mendable.ai", StartupWebsite)
-    print("Parsed startup data (Pydantic model):", startup_data)
+# Using Pydantic model
+startup_data = parseFromURL("https://mendable.ai", StartupWebsite)
+print("Parsed startup data (Pydantic model):", startup_data)
 
-    # Using OpenAPI schema
-    openapi_schema = {
-        "type": "object",
-        "properties": {
-            "github_social_link": {
-                "type": "string"
-            },
-            "twitter_social_link": {
-                "type": "string"
-            },
-            "discord_social_link": {
-                "type": "string"
-            }
+# Using OpenAPI schema
+openapi_schema = {
+    "type": "object",
+    "properties": {
+        "github_social_link": {
+            "type": "string"
+        },
+        "twitter_social_link": {
+            "type": "string"
+        },
+        "discord_social_link": {
+            "type": "string"
         }
     }
-    
-    startup_data_dict = parseFromURL("https://docs.vapi.ai/assistants/dynamic-variables", openapi_schema)
-    print("Parsed startup data (OpenAPI schema):", startup_data_dict)
+}
+
+startup_data_dict = parseFromURL("https://docs.vapi.ai/assistants/dynamic-variables", openapi_schema)
+print("Parsed startup data (OpenAPI schema):", startup_data_dict)
 ```
