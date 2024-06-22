@@ -90,3 +90,100 @@ json_schema = {
 startup_data_dict = parseFromURL("https://docs.vapi.ai/assistants/dynamic-variables", json_schema)
 print("Parsed startup data (JSON schema):", startup_data_dict)
 ```
+
+
+## Scrape profile information from linkedin
+
+``` python
+from surferai import *
+
+# Using JSON schema
+json_schema = {
+    "type": "object",
+    "properties": {
+      "name": {
+        "type": "string"
+      },
+      "headline": {
+        "type": "string"
+      },
+      "location": {
+        "type": "string"
+      },
+      "current_job": {
+        "type": "string"
+      },
+      "education": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "school": {
+              "type": "string"
+            },
+            "degree": {
+              "type": "string"
+            },
+            "field_of_study": {
+              "type": "string"
+            },
+            "dates_attended": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "skills": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      }
+    }
+  }
+
+startup_data_dict = parseFromURL("https://www.linkedin.com/in/jackblair876/", json_schema)
+print("Parsed person data (JSON schema):", startup_data_dict)
+```
+
+Response:
+
+```json
+{
+  "success": true,
+  "structuredOutput": {
+    "name": "Jack Blair",
+    "headline": "🎓 PURDUE '26 | 🎓 TJHSST '22 | 🔭 2x Founder | 🧠 AI Researcher | 💻 Full Stack Developer | 🦅 Eagle Scout",
+    "location": "San Francisco Bay Area",
+    "current_job": null,
+    "education": [
+      {
+        "school": "Purdue University College of Engineering",
+        "degree": "Bachelor of Engineering - BE",
+        "field_of_study": "Visual Design Engineering",
+        "dates_attended": "Aug 2022 - May 2026"
+      },
+      {
+        "school": "Thomas Jefferson High School for Science and Technology",
+        "degree": null,
+        "field_of_study": "Prototyping, Robotics, and Automation Engineering",
+        "dates_attended": "Aug 2018 - Jun 2022"
+      }
+    ],
+    "skills": [
+      "Time Management",
+      "API Development",
+      "Computer-Aided Design (CAD)",
+      "Video Editing",
+      "Software Development"
+    ]
+  },
+  "metadata": {
+    "title": "Jack Blair | LinkedIn",
+    "description": "",
+    "keywords": "",
+    "ogLocaleAlternate": [],
+    "sourceURL": "https://www.linkedin.com/in/jackblair876/"
+  }
+
+  ```
