@@ -1,4 +1,53 @@
-Great Examples
+# Examples
+## Scrape twitter data from profile
+
+``` python
+from surferai import *
+
+# Using JSON schema
+json_schema = {
+    "type": "object",
+    "properties": {
+        "twitter_username_@": {
+            "type": "string"
+        },
+        "twitter_description": {
+            "type": "string"
+        },
+        "follower_count": {
+            "type": "number"
+        },
+        "following_count": {
+            "type": "number"
+        }
+    }
+}
+
+startup_data_dict = parseFromURL("https://www.x.com/JackBlair87", json_schema)
+print("Parsed startup data (JSON schema):", startup_data_dict)
+```
+
+Output:
+``` json
+{
+  "success": true,
+  "structuredOutput": {
+    "twitter_username_@": "JackBlair87",
+    "twitter_description": "20, living @_TheResidency, building @surfsupai @hyperherd ai agent research + visual design engineering @purdue Bay Area, CA | Purdue, IN",
+    "follower_count": 272,
+    "following_count": 414
+  },
+  "metadata": {
+    "title": "Jack Blair 🌴 (@JackBlair87) / X",
+    "description": "",
+    "keywords": "",
+    "ogLocaleAlternate": [],
+    "sourceURL": "https://x.com/JackBlair87"
+  }
+}
+```
+
+## Scrape company information from their website
 
 ``` python
 from surferai import *
