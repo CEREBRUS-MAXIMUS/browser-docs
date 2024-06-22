@@ -14,11 +14,11 @@ startup_data = parseFromURL("https://mendable.ai", StartupWebsite)
 print("Parsed startup data (Pydantic model):", startup_data)
 
 #===================================================
-#OR YOU CAN JUST PASS IN THE OPENAPI SCHEMA DIRECTLY
+#OR YOU CAN JUST PASS IN THE JSON SCHEMA DIRECTLY
 #===================================================
 
-# Using OpenAPI schema
-openapi_schema = {
+# Using JSON schema
+json_schema = {
     "type": "object",
     "properties": {
         "github_social_link": {
@@ -33,6 +33,6 @@ openapi_schema = {
     }
 }
 
-startup_data_dict = parseFromURL("https://docs.vapi.ai/assistants/dynamic-variables", openapi_schema)
-print("Parsed startup data (OpenAPI schema):", startup_data_dict)
+startup_data_dict = parseFromURL("https://docs.vapi.ai/assistants/dynamic-variables", json_schema)
+print("Parsed startup data (JSON schema):", startup_data_dict)
 ```
