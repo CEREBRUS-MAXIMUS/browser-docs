@@ -2,17 +2,17 @@
   "openapi": "3.0.1",
   "info": {
     "title": "Surfer API",
-    "description": "API for web scraping and parsing in the Surfer application, supporting both decentralized and local processing",
-    "version": "1.1.0"
+    "description": "API for web scraping and parsing in the Surfer application",
+    "version": "1.0.0"
   },
   "servers": [
     {
       "url": "http://api.surfsup.ai",
-      "description": "Decentralized processing server"
+      "description": "Cloud server"
     },
     {
       "url": "http://localhost:42069",
-      "description": "Local processing server"
+      "description": "Local server"
     }
   ],
   "paths": {
@@ -53,7 +53,7 @@
     "/convertToMarkdown": {
       "post": {
         "summary": "Convert URL to Markdown",
-        "description": "Converts a webpage to Markdown format. Can use either decentralized or local processing.",
+        "description": "Converts a webpage to Markdown format.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -63,11 +63,6 @@
                   "url": {
                     "type": "string",
                     "description": "The URL of the webpage to convert"
-                  },
-                  "local": {
-                    "type": "boolean",
-                    "description": "If true, uses local processing. If false or omitted, uses decentralized processing.",
-                    "default": false
                   }
                 },
                 "required": ["url"]
@@ -102,7 +97,7 @@
     "/parseStructuredOutput": {
       "post": {
         "summary": "Parse structured output from URL",
-        "description": "Extracts structured data from a webpage based on a provided schema. Can use either decentralized or local processing.",
+        "description": "Extracts structured data from a webpage based on a provided schema.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -112,11 +107,6 @@
                   "url": {
                     "type": "string",
                     "description": "The URL of the webpage to parse"
-                  },
-                  "local": {
-                    "type": "boolean",
-                    "description": "If true, uses local processing. If false or omitted, uses decentralized processing.",
-                    "default": false
                   },
                   "parsingOutput": {
                     "type": "object",
