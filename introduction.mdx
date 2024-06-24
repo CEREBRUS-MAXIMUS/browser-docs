@@ -1,48 +1,76 @@
 ---
 title: 'Welcome to Surfer'
-description: 'Surfer is authenticated, local, private, and fast automated web scraping.'
+description: 'Surfer offers both decentralized and local, private automated web scraping.'
 ---
 
 <Steps>
-  <Step title="Install Surfer">
-    Visit our [download page](https://surfsup.ai) to get the latest version of Surfer for your operating system.
-  </Step>
   <Step title="Install Python Package">
-    ```python
+    ```bash
     pip install surferai
-        ```
+    ```
   </Step>
+
+  <Step title="(Optional) Install Local Surfer Application">
+    If you want to use Surfer locally, visit our [download page](https://surfsup.ai) to get the latest version of the Surfer application for your operating system.
+  </Step>
+
   <Step title="Convert Websites to LLM-readable data">
     ```python
     from surferai import *
 
-markdown_result = convertToMarkdown("https://example.com")
-print("Markdown conversion:", markdown_result)
-        ```
+    # Use decentralized browsing (default)
+    markdown_result = convertToMarkdown("https://example.com")
+    print("Markdown conversion (decentralized):", markdown_result)
+
+    # Use local processing (requires Surfer application)
+    local_markdown_result = convertToMarkdown("https://example.com", local=True)
+    print("Markdown conversion (local):", local_markdown_result)
+    ```
   </Step>
-  <Step title="Extract Structured Data from Websites ">
+
+  <Step title="Extract Structured Data from Websites">
     ```python
     from surferai import *
-from pydantic import BaseModel
-from typing import Optional
+    from pydantic import BaseModel
+    from typing import Optional
 
-# Define a class for your exctraction format
-class StartupWebsite(BaseModel):
-      company_mission: Optional[str] 
-      supports_sso: Optional[bool]
-      is_open_source: Optional[bool]
+    # Define a class for your extraction format
+    class StartupWebsite(BaseModel):
+        company_mission: Optional[str] 
+        supports_sso: Optional[bool]
+        is_open_source: Optional[bool]
 
-      #A nice to string method
-      def __str__(self):
-          return f"Company Mission: {self.company_mission}\nSupports SSO: {self.supports_sso}\nIs Open Source: {self.is_open_source}"
+        # A nice to string method
+        def __str__(self):
+            return f"Company Mission: {self.company_mission}\nSupports SSO: {self.supports_sso}\nIs Open Source: {self.is_open_source}"
 
+    # Use decentralized browsing (default)
+    startup_data = parseFromURL("https://mendable.ai", StartupWebsite)
+    print("Parsed startup data (decentralized):", startup_data)
 
-startup_data = parseFromURL("https://mendable.ai", StartupWebsite)
-print("Parsed startup data:", startup_data)
-
-        ```
-        `startup_data` is automatically Type StartupWebsite!
-        
-        All class fields are Optional in case the AI cannot find the information.
+    # Use local processing (requires Surfer application)
+    local_startup_data = parseFromURL("https://mendable.ai", StartupWebsite, local=True)
+    print("Parsed startup data (local):", local_startup_data)
+    ```
+    `startup_data` and `local_startup_data` are automatically of type StartupWebsite!
+    
+    All class fields are Optional in case the AI cannot find the information.
   </Step>
 </Steps>
+
+## Decentralized vs Local Processing
+
+Surfer now offers two modes of operation:
+
+1. **Decentralized Browsing (Default)**: 
+   - No need to install the local Surfer application
+   - Uses a decentralized network for web scraping
+   - Suitable for most use cases (expect for when you need your specific authentication while scraping)
+
+2. **Local Processing**:
+   - Requires installation of the Surfer application
+   - All processing happens on your local machine
+   - Provides additional privacy and control
+   - You risk our accounts getting rate-limited and banned, just like Puppeteer.
+
+To use local processing, set `local=True` in the function calls and ensure you have the Surfer application installed and running.
